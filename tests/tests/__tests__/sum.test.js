@@ -1,4 +1,4 @@
-jest.useFakeTimers()
+//jest.useFakeTimers()
 
 const wdio = require('webdriverio');
 const findElementWait = 15000;
@@ -6,20 +6,22 @@ const testTimeOut = 30000;
 
 describe('Appium with Jest automation testing', () => {
     let driver;
+    const closeAppAndReset = true;
 
     const caps = {
         "platformName":"Android",
         "appium:automationName":"UiAutomator2",
         "appium:appPackage":"myapp.appiumapp.developerapp",
         "appium:appActivity":"com.mendix.nativetemplate.MainActivity",
-        "appium:noReset":true,
-        "appium:ensureWebviewsHavePages":true,
-        "appium:nativeWebScreenshot":true,
-        "appium:newCommandTimeout":3600,
+        "appium:noReset": !closeAppAndReset,
+        'appium:shouldterminateApp': closeAppAndReset,
+        "appium:ensureWebviewsHavePages": true,
+        "appium:nativeWebScreenshot": true,
+        "appium:newCommandTimeout": 3600,
         "appium:connectHardwareKeyboard":true
     }
 
-    beforeAll(async function(){
+    beforeAll(async () => {
       opts = {
         protocol: "http",
         hostname: "127.0.0.1",
@@ -30,9 +32,17 @@ describe('Appium with Jest automation testing', () => {
      
       driver = await wdio.remote(opts);
       driver.setTimeouts(findElementWait);
+
+      // this click is performed on the popup that appears requesting permission
+      // to use the camera
+      if (closeAppAndReset) {
+        let el0 = await driver.$("id=com.android.permissioncontroller:id/permission_allow_foreground_only_button");
+        await el0.click();          
+      }
+
     }, testTimeOut)
 
-    afterAll(async function(){
+    afterAll(async () => {
         await driver.deleteSession();
     })
 
