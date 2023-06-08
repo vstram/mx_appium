@@ -1,5 +1,3 @@
-//jest.useFakeTimers()
-
 const wdio = require('webdriverio');
 const findElementWait = 15000;
 const testTimeOut = 30000;
@@ -47,6 +45,8 @@ describe('Appium with Jest automation testing', () => {
     })
 
     test('The sum using the values from textEdits are correct', async () => {
+        await driver.startRecordingScreen();
+
         let el1 = await driver.$("~appUrl");
         await el1.waitForDisplayed();
         await el1.setValue("http://192.168.0.42:8080/");
@@ -77,6 +77,9 @@ describe('Appium with Jest automation testing', () => {
         let correctText7 = 'Result: 7';
 
         expect(text7).toBe(correctText7);
+
+        //await driver.saveScreenshot('test.png');
+        await driver.saveRecordingScreen('./test.mp4');
 
     }, testTimeOut);
 })
