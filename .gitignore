@@ -17,3 +17,5 @@
 *.bak
 *.png
 *.mp4
+/appiumapp.mpr.bak
+/appiumapp.mpr.lock

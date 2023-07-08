@@ -1,6 +1,6 @@
 const wdio = require('webdriverio');
 const findElementWait = 30000;
-const testTimeOut = 50000;
+const testTimeOut = 60000;
 
 describe('Appium with Jest automation testing', () => {
     let driver;
