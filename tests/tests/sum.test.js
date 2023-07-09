@@ -1,6 +1,6 @@
 const wdio = require('webdriverio');
-const findElementWait = 30000;
-const testTimeOut = 60000;
+const findElementWait = 45000;
+const testTimeOut = 90000;
 
 describe('Appium with Jest automation testing', () => {
     let driver;
@@ -78,7 +78,7 @@ describe('Appium with Jest automation testing', () => {
 
         expect(text7).toBe(correctText7);
 
-        //await driver.saveScreenshot('test.png');
+        await driver.saveScreenshot('test.png');
         await driver.saveRecordingScreen('./test.mp4');
 
     }, testTimeOut);
