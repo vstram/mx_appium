@@ -49,7 +49,7 @@ describe('Appium with Jest automation testing', () => {
 
         let el1 = await driver.$("~appUrl");
         await el1.waitForDisplayed();
-        await el1.setValue("http://192.168.0.51:8080/");
+        await el1.setValue("http://192.168.0.71:8080/");
         await el1.hideKeyboard();
 
         let el2 = await driver.$('id=myapp.appiumapp.developerapp:id/launch_app_button');
